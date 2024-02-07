@@ -1,0 +1,19 @@
+name: SimpleCov Merge Action
+description: Merges multiple simplecov resultsets to single result (and lcov)
+author: mikian
+
+inputs:
+  coverage_path:
+    description: Path for SimpleCov Resultset JSON files.
+    required: false
+    default: coverage/
+
+outputs:
+  lcov_path:
+    description: Path to LCov file
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    COVERAGE_PATH: ${{ inputs.coverage_path }}
