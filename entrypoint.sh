@@ -10,7 +10,7 @@ SimpleCov.collate Dir["#{ENV['COVERAGE_PATH']}/*.json"], "rails" do
   formatter SimpleCov::Formatter::MultiFormatter.new(
     [
       SimpleCov::Formatter::LcovFormatter,
-      SimpleCov::Formatter::JsonFormatter
+      SimpleCov::Formatter::JSONFormatter
     ]
   )
 end
