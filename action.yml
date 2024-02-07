@@ -9,6 +9,8 @@ inputs:
     default: coverage/
 
 outputs:
+  json_path:
+    description: Path to JSON coverage file
   lcov_path:
     description: Path to LCov file
 
