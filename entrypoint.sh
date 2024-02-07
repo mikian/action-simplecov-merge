@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require "simplecov"
+require "simplecov-json"
 require "simplecov-lcov"
 
 SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
