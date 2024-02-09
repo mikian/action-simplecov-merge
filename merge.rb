@@ -6,7 +6,11 @@ require "simplecov-lcov"
 
 SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
 
-SimpleCov.collate Dir["#{ENV['COVERAGE_PATH']}/**/*.json"], "rails" do
+files = Dir["#{ENV['COVERAGE_PATH']}/**/*.json"]
+puts "Merging files:"
+files.each { |file| puts " - #{file}"}
+
+SimpleCov.collate files, "rails" do
   formatter SimpleCov::Formatter::MultiFormatter.new(
     [
       SimpleCov::Formatter::LcovFormatter,

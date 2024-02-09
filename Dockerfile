@@ -3,6 +3,7 @@ FROM ruby:3.3
 COPY Gemfile Gemfile.lock ./
 RUN bundle
 
-COPY entrypoint.sh /entrypoint.sh
+COPY merge.rb /merge.rb
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENV COVERAGE_PATH /coverage
+ENTRYPOINT ["ruby", "/merge.rb"]
