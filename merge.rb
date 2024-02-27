@@ -11,7 +11,8 @@ puts "Merging files:"
 files.each { |file| puts " - #{file}"}
 
 puts "Working dir: #{Dir.getwd}"
-system("find .")
+puts JSON.dump(ENV.to_h)
+
 SimpleCov.collate files, "rails" do
   formatter SimpleCov::Formatter::MultiFormatter.new(
     [
