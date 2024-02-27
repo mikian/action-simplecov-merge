@@ -12,16 +12,14 @@ files = Dir["#{ENV['COVERAGE_PATH']}/**/*.json"].map do |file|
   puts " - #{file}"
   coverage = File.read(file).gsub(%r{#{ENV["WORKSPACE"]}}, ENV["GITHUB_WORKSPACE"])
   File.open(file, "wb") { |io| io.write(coverage) }
+
+  file
 end
 
 SimpleCov.collate files, "rails" do
-  formatter SimpleCov::Formatter::MultiFormatter.new(
-    [
-      SimpleCov::Formatter::JSONFormatter,
-      SimpleCov::Formatter::LcovFormatter,
-      SimpleCov::Formatter::SimpleFormatter,
-    ]
-  )
+  formatters = [
+    SimpleCov::Formatter::JSONFormatter, SimpleCov::Formatter::LcovFormatter
+  ]
 end
 
 if ENV.key?("GITHUB_OUTPUT")
