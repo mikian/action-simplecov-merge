@@ -6,12 +6,13 @@ require "simplecov-lcov"
 
 SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
 
-files = Dir["#{ENV['COVERAGE_PATH']}/**/*.json"]
+# Find and normalise all covergae files
 puts "Merging files:"
-files.each { |file| puts " - #{file}"}
-
-puts "Working dir: #{Dir.getwd}"
-puts JSON.dump(ENV.to_h)
+files = Dir["#{ENV['COVERAGE_PATH']}/**/*.json"].map do |file|
+  puts " - #{file}"
+  coverage = File.read(file).gsub(%r{#{ENV["WORKSPACE"]}}, ENV["GITHUB_WORKSPACE"])
+  File.open(file, "wb") { |io| io.write(coverage) }
+end
 
 SimpleCov.collate files, "rails" do
   formatter SimpleCov::Formatter::MultiFormatter.new(

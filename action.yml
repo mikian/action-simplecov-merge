@@ -7,6 +7,10 @@ inputs:
     description: Path for SimpleCov Resultset JSON files.
     required: false
     default: coverage/
+  workspace:
+    description: GitHub Workspace for normalising coverage paths
+    required: false
+    default: ${{ github.workspace }}
 
 outputs:
   json_path:
