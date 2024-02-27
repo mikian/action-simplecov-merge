@@ -7,6 +7,7 @@ require "simplecov-lcov"
 SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
 
 # Find and normalise all covergae files
+puts "Normalise paths #{WORKSPACE} -> #{ENV["GITHUB_WORKSPACE"]}"
 puts "Merging files:"
 files = Dir["#{ENV['COVERAGE_PATH']}/**/*.json"].map do |file|
   puts " - #{file}"
