@@ -24,9 +24,9 @@ files = Dir["#{ENV['COVERAGE_PATH']}/**/*.json", "#{ENV['COVERAGE_PATH']}/**/.*.
 end
 
 SimpleCov.collate files, "rails" do
-  formatters = [
+  formatter SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::JSONFormatter, SimpleCov::Formatter::LcovFormatter
-  ]
+  ])
 end
 
 if ENV.key?("GITHUB_OUTPUT")
