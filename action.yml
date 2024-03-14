@@ -7,20 +7,20 @@ inputs:
     description: Path for SimpleCov Resultset JSON files.
     required: false
     default: coverage/
-  workspace:
-    description: GitHub Workspace for normalising coverage paths
-    required: false
-    default: ${{ github.workspace }}
 
 outputs:
   json_path:
     description: Path to JSON coverage file
+    value: ${{ steps.merge.outputs.json_path }}
   lcov_path:
     description: Path to LCov file
+    value: ${{ steps.merge.outputs.lcov_path }}
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  env:
-    COVERAGE_PATH: ${{ inputs.coverage_path }}
-    WORKSPACE: ${{ inputs.workspace }}
+  using: composite
+  steps:
+    - id: merge
+      run: ruby ./merge.rb
+      shell: bash
+      env:
+       COVERAGE_PATH: ${{ inputs.coverage_path }}

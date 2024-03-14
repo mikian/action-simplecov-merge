@@ -1,18 +1,23 @@
 #!/usr/bin/env ruby
 
+require "bundler"
+require "bundler/inline"
+
+gemfile do
+  source "https://rubygems.org"
+  gem "simplecov"
+  gem "simplecov-lcov"
+end
+
 require "simplecov"
 require "simplecov-json"
 require "simplecov-lcov"
 
 SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
 
-# Find and normalise all covergae files
-puts "Normalise paths #{ENV["WORKSPACE"]} -> #{ENV["GITHUB_WORKSPACE"]}"
 puts "Merging files:"
 files = Dir["#{ENV['COVERAGE_PATH']}/**/*.json"].map do |file|
   puts " - #{file}"
-  coverage = File.read(file).gsub(%r{#{ENV["WORKSPACE"]}}, ENV["GITHUB_WORKSPACE"])
-  File.open(file, "wb") { |io| io.write(coverage) }
 
   file
 end
