@@ -20,7 +20,8 @@ runs:
   using: composite
   steps:
     - id: merge
-      run: ruby ./merge.rb
+      run: ruby ${GITHUB_ACTION_PATH}/merge.rb
       shell: bash
       env:
-       COVERAGE_PATH: ${{ inputs.coverage_path }}
+        COVERAGE_PATH: ${{ inputs.coverage_path }}
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
